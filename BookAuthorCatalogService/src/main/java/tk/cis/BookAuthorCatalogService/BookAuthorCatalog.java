@@ -24,12 +24,12 @@ public class BookAuthorCatalog {
 	public BookCatalogDetails getBookCatalog(@PathVariable("bookid") String bookid) {
 		
 		//First get BookInfo by id
-		BookDetails book = template.getForObject("http://localhost:8080/BookInfo/"+bookid, BookDetails.class);
+		BookDetails book = template.getForObject("http://book-info-service/BookInfo/"+bookid, BookDetails.class);
 		BookCatalogDetails bookauthorcatalog = new BookCatalogDetails(book.getBookId(), book.getBookName(), book.getDetails(), book.getPrice());
 		List<String> authorids = book.getAuthorIds();
 		//Iterate over Author ids and get AuthorInfo
 		List<AuthorDetails> authors = authorids.stream().map(authorid ->{
-			return template.getForObject("http://localhost:8081/AuthorInfo/"+authorid, AuthorDetails.class);
+			return template.getForObject("http://author-info-service/AuthorInfo/"+authorid, AuthorDetails.class);
 		}).collect(Collectors.toList());
 		//popualate bookauthcatalog
 		bookauthorcatalog.setAuthorIds(authors);
