@@ -11,6 +11,7 @@ public class AuthorInfoServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		System.out.print("Testing....");
 	}
 
 }
