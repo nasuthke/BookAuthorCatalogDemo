@@ -31,7 +31,7 @@ public class BookAuthorCatalog {
 		List<AuthorDetails> authors = authorids.stream().map(authorid ->{
 			return template.getForObject("http://author-info-service/AuthorInfo/"+authorid, AuthorDetails.class);
 		}).collect(Collectors.toList());
-		//popualate bookauthcatalog
+		//Populate bookauthcatalog
 		bookauthorcatalog.setAuthorIds(authors);
 		return bookauthorcatalog;
 	}
